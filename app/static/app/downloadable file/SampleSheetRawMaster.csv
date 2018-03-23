@@ -1,0 +1,5 @@
+mode_name,material_type,material_name,purchase_name,purachase_date,factory_wise_bifercation,ex_factory_price,supplier_name,hsn_code,Gst_per,price_after_Gst_per,transporter,freight,cost_price
+LOCAL,R,sample1,sample1,18-12-12,sample1,0,sample1,1,0,0,0,0,0
+LOCAL,P,sample2,sample2,18-12-12,sample2,0,sample2,2,0,0,0,0,0
+LOCAL,R,sample3,sample3,18-12-12,sample3,0,sample3,3,0,0,0,0,0
+LOCAL,P,sample4,sample4,18-12-12,sample4,0,sample4,4,0,0,0,0,0

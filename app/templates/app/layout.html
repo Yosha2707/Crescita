@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/custom.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/datepicker.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/icon.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/sweetalert.css' %}" />
+    
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'app/scripts/datatable.js' %}"></script>
+    <script src="{% static 'app/scripts/moment.js' %}"></script>
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+
+</head>
+
+<body>
+    <div class="clearfix">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{% url 'home' %}" class="navbar-brand">Crescita</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/mode_master">Mode Master</a></li>
+                    <li><a href="{% url 'users' %}">Users</a></li>
+                    <li><a href="/raw_packing_master">Raw/Packing Material Master</a></li>
+                    <li><a href="/manufacturing_cost_master">Manufacturing Cost Master</a></li>
+                    <li><a href="/cost_price">Cost Price</a></li>
+                    <li><a href="{% url 'profit_master' %}">Proft/ Loss Sheet</a></li>
+
+                    {#<li><a href="{% url 'about' %}">About</a></li>#}
+                    {#<li><a href="{% url 'contact' %}">Contact</a></li>#}
+                </ul>
+                {% include 'app/loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="container body-content">
+{% block content %}{% endblock %}
+        
+    </div>
+
+
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+    <script src="{% static 'app/scripts/sweetalert.js' %}"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

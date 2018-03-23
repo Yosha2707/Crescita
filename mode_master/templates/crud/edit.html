@@ -1,0 +1,16 @@
+﻿{% extends 'app/layout.html' %}
+{% block scripts %}
+    
+<div class="container" style="background-color:#D5D7D8; padding:38px 41px 68px 28px; border-top:8px solid black; margin-top:50px;">
+
+<h4 style="margin-left:20px;"><b>Update Mode Name</b></h4>
+    <form method="POST" action="update/{{ members.id }}">
+        {% csrf_token %}
+       
+            <div class="col-lg-12">
+            <input type="text" class="form-control" style="width:100%;" name="mode_name" value="{{members.mode_name}}"/ required><br>
+            <button type="submit" class="btn btn-sm btn-dark"><span class="glyphicon glyphicon-edit"></span> Update</button>
+        </div>
+        </form>
+            </div>
+{% endblock %}

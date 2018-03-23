@@ -1,0 +1,175 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+
+<div class="container">
+    <h2>Raw And Packing Material</h2><br /><br />
+   <form class="form-horizontal" name="frm" action="/raw_packing_master/insert" method="post" id="form1">
+       {% csrf_token %}
+<div class="col-md-12">
+      
+      <div class="form-group">
+      <label class="control-label col-md-2" for="mode_name">Mode Of Purchase:</label>
+      <div class="col-md-10">          
+          <select name="mode_id" class="form-control" style="width:100%;">
+                {% for mode in modes %}
+                    <option value="{{mode.id}}">{{mode.mode_name}}</option>
+                {% endfor %}
+            </select>
+      </div>
+    </div>
+
+      <div class="form-group">
+      <label class="control-label col-md-2" for="raw_material">Material Type:</label>
+      <div class="col-md-10">          
+          <select name="material_type" class="form-control" style="width:100%;">
+                <option value="Packing Material">Packing Material</option>
+                <option value="Raw Material">Raw Material</option>
+            </select>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="purchase_name">Purchase Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" id="purchase_name" name="purchase_name" style="width:100%;" required/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="material_name">Material Name:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control validate" id="material_name" name="material_name" style="width:100%;" required/>
+      </div>
+    </div>
+
+    <div class="form-group"> <!-- Date input -->
+        <label class="control-label col-sm-2" for="purchase_date">Purchase Date</label>
+      <div class="col-sm-10">
+        <input typeof="text" class="form-control validate" id="datepicker" name="purchase_date" placeholder="MM/DD/YYY" style="width:100%;" required/>
+      </div>
+       </div>
+    
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="factory_wise_bifercation">Factory Wise Bifercation(optional):</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="factory_wise_bifercation" name="factory_wise_bifercation" style="width:100%;">
+      </div>
+    </div>
+     
+    
+      <div class="form-group">
+      <label class="control-label col-lg-2" for="supplier_name">Supplier Name(optional):</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="supplier_name" name="supplier_name" style="width:100%;">
+      </div>
+    </div>
+
+ <div class="form-group">
+      <label class="control-label col-sm-2" for="hsn_code">HSN Code:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" id="hsn_code" name="hsn_code" style="width:100%;" required/>
+      </div>
+    </div>
+
+<div class="form-group">
+      <label class="control-label col-sm-2" for="transpoter">Transpoter:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" id="transpoter" name="transpoter" style="width:100%;" required/>
+      </div>
+    </div>
+
+ <div class="form-group">
+      <label class="control-label col-sm-2" for="ex_factory_price">Ex-Factory Price:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" id="ex_factory_price" style="width:100%;" onchange="modifyText3()" name="ex_factory_price" value="0" required/>
+      </div>
+     </div>
+
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="gst">GST%:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" id="gst" style="width:100%;" onchange="modifyText3()" name="gst" value="0">
+      </div>
+    </div>
+     
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="price_after_gst">Price After GST:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" style="width:100%;" id="price_after_gst" onchange="modifyText3()" name="price_after_gst" value="0">
+      </div>
+    </div>
+      
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="freight">Freight per KG/PC:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" style="width:100%;" id="freight" onchange="modifyText3()" name="freight" value="0">
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="cost_price">Cost Price per KG/PG/BAG/BOX:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control validate" style="width:100%;" id="cost_price" name="cost_price" value="0">
+      </div>
+    </div>
+        <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+       <button type="submit" onclick="return IsEmpty()" class="btn btn-sm btn-dark"><span class="glyphicon glyphicon-plus"></span>Submit</button><br />
+      </div>
+    </div>
+    </div>
+   
+     </form>
+</div>
+
+
+<script type="text/javascript">
+
+$("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' }).val();      
+ 
+function modifyText3() 
+{ 
+var a = document.getElementById("ex_factory_price").value; 
+var b = document.getElementById("gst").value; 
+
+    var c = parseFloat(a) * parseFloat(b) / 100; 
+    var d = (parseFloat(c) + parseFloat(a)).toFixed(4);
+    document.getElementById("price_after_gst").value = d; 
+
+    var f = document.getElementById("freight").value;
+
+    var e = (parseFloat(f) + parseFloat(d)).toFixed(4); 
+    document.getElementById("cost_price").value = e;  
+    } 
+
+function IsEmpty(){
+  if(document.getElementsByID("purchase_name").value === "")
+  {
+    swal("Please fill the required fields...!!");
+    return false;
+  }
+    return true;
+
+    }
+
+     //window.onload = function ()
+     //{
+     //    var form = document.getElementById('theForm');
+     //    form.button.onclick = function ()
+     //    {
+     //        for (var i = 0; i < form.elements.length; i++)
+     //        {
+     //            if (form.elements[i].value === '' && form.elements[i].hasAttribute('required'))
+     //            {
+     //                alert('There are some required fields!'); return false;
+     //            }
+     //        }
+     //    };
+     //};
+</script> 
+  {% endblock %}
+
+
+

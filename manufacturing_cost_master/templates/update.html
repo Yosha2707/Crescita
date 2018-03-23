@@ -1,0 +1,544 @@
+﻿ {% extends "app/layout.html" %}
+ 
+
+ {% block scripts %} 
+  
+    <form class="form-horizontal" action="/manufacturing_cost_master/update/{{ a.id }}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+        <h2 style="font-weight:bold;" class="col-md-6">Repacking Material Cost Price</h2>
+         <button class="btn btn-dark col-md-1 pull-right">SAVE</button>
+            </div>
+                </div>
+            <div class="row" style="margin:30px 0;">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="product_name">Product Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control max" id="product_name" value="{{a.product_name}}" name="product_name" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="product_code">Product Code:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control max"  value="{{a.product_code}}" id="product_code" name="product_code" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="factory_name">Factory Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control max"  value="{{a.factory_name}}" id="factory_name" name="factory_name" required/>
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="factory_name">Add Packing Material Row:</label>
+            <div class="col-sm-10">
+                <div class="table-responsive" style="overflow-x:hidden">
+                    <table class="table table-responsive table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="background-color:black;color:white;">Details</th>
+                                <th style="background-color:black;color:white;">Pack Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pack Size</td>
+                                <td style="width:233px;">
+                                    <input type="text"  value="{{a.pack_size}}"class="form-control validate[required]" name="pack_size" required/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+              
+
+            
+                    <table class="table table-responsive table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="background-color:black;color:white;">Raw Material Name</th>
+                                <th style="background-color:black;color:white;">Cost Price</th>
+                                <th style="background-color:black;color:white;">Multiplier</th>
+                                <th style="background-color:black;color:white;">Final Raw Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control validate[required]"  value="{{b.material_name}}"  style="width:100%;" id="rawmatname" name="material_name" onkeyup="AutosuggestNLoader(this);" />
+                                    <input type="hidden" name="rt_id"  value="{{a.rt_id}}" />
+                                    <input type="hidden" name="Raw_id"  value="{{a.Raw_id}}" />
+                                    <div class="suggesstion-box suggestionDropdown"></div>
+                                </td>
+                                <td>
+                                   <input type="text" style="width:100%;" class="form-control validate[required]"  value="{{b.cost_price}}" readonly="readonly" onchange="modifyText2()"  id="rawmatcostp" name="raw_cost_price" />
+                                </td>
+                                <td>
+                                    <input type="text" style="width:100%;" class="form-control validate[required]"  value="{{a.rawmultiplier}}" onchange="modifyText2()" id="rawmulti" name="rawmultiplier" required/>
+                                </td>
+                                <td>
+                                    <input type="text" style="width:100%;" class="form-control validate[required]" value="{{multI}}" readonly="readonly" onchange="modifyText2()" id="finalrawcost" name="final_raw_cost" />
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                   <table class="table table-responsive table-bordered table-hover table-striped" >
+	                <thead>
+                            <tr>
+                                
+                                <td>
+                                    <input type="text" style="font-weight: bold;float: right;" readonly="readonly"  class="form-control" value="Wastage%" />
+                                </td>
+                                <td>
+                                    <input type="text" style="font-weight: bold;float: right;"  value="{{a.wastage}}"id="wastage" onchange="modifyText2()" name="wastage" class="form-control" required/>
+                                </td>
+                            </tr>
+                        </thead>
+                       </table>
+                      <table class="table table-responsive table-bordered table-hover table-striped" >
+	                <thead>
+                            <tr>
+                               
+                                <td>
+                                    <input type="text" style="font-weight: bold;float: right;" readonly="readonly" class="form-control" value="      Raw Material Cost" />
+                                </td>
+                                <td>
+                                    <input type="text" style="font-weight: bold;float: right;" value="{{a.rawmultiplier}}" name="multi" id="multi" readonly="readonly" onchange="modifyText2()" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" value="{{div}}" style="font-weight: bold;float: right;" name="total" id="total" onchange="modifyText2()" class="form-control" />
+                                </td>
+                            </tr>
+                        </thead>
+                          </table>
+                      <table class="table table-responsive table-bordered table-hover table-striped" >
+	                <thead>
+                            <tr>
+                                <td style="width: 75%;">
+                                    <input type="text" style="font-weight: bold; width:196px;float: right;" value="Raw Material Cost(A)" readonly="readonly" class="form-control">
+                                </td>
+
+                                <td style="width:100%;">
+                                    <input type="text" readonly="readonly" class="form-control" onchange="modifyText4()" name="rm_cost" id="rmcost" value="{{finalR}}" />
+                                </td>
+                            </tr>
+                        </thead>
+                          </table>
+                               
+                </div>
+            </div>
+        </div>
+    
+
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="factory_name"></label>
+            <div class="col-sm-10">
+                <div class="table-responsive" style="overflow-x:hidden">
+                    <table id="maintable" class="table table-responsive table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="background-color:black;color:white;">Packing Material Name</th>
+                                <th style="background-color:black;color:white;">Cost Price</th>
+                                <th style="background-color:black;color:white;">Multiplier</th>
+                                <th style="background-color:black;color:white;">Final Packing Cost</th>
+                                <th style="background-color:black;color:white;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for f in final %}
+                            <tr>
+                                <td>
+                                <input type="text" class="form-control validate[required]" name="packing_material_name" value="{{f.material_name}}" onkeyup="AutosuggestLoader(this);" />
+                                    <input type="hidden" name="packing_id[]" value="0" />
+                                    <input type="hidden" name="Raw_id[]" value="0" />
+                                    <div class="suggesstion-box suggestionDropdown"></div>
+                            </td>
+                            <td>
+                              <input type="text" class="form-control validate[required]" id="packmatcostp" name="cost_price" value="{{f.cost_price}}" onchange="modifyText3(this)" onkeyup="modifyText3(this)" disabled/>
+  
+                            </td>
+                            <td>
+                            <input type="text" class="form-control validate[required]" name="multiplier[]" id="packmatmulti" value="{{f.multipliar}}" onchange="modifyText3(this)" onKeyup="modifyText3(this)"  />
+                            </td>
+                                <td>
+                                    <input type="text" class="form-control rowpm" name="final_pack_cost" id="finalpackcost" value="{{f.finalpack}}" onchange="modifyText3(this)" onKeyup="modifyText3(this)" />
+                                </td>
+                                 <td>
+                                
+                                <a href="remove/{{f.id}}" role="button" class=" btn btn-sm"><i class="material-icons" style="color:black;">&#xe872;</i></a>
+                                </td>
+                             </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" id="addrows" class="btn btn-dark" style="margin-left: 20px; margin-top:25px;">Add Row</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-responsive table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <td style="width:800px;"><input type="text" style="font-weight: bold;float: right;" value="Packing Material Cost(B)" readonly="readonly" class="form-control"></td>
+                                <td><input type="text" value="{{baba}}" readonly="readonly" onchange="modifyText4()" class="form-control" name="pmcost" id="PMcost"></td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+
+
+    <div class="form-group">
+         <label class="control-label col-sm-2"></label>
+        <div class="col-sm-10">
+            <div class="table-responsive" style="overflow-x:hidden">
+                <table id="maintable" class="table table-responsive table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th style="background-color:black;color:white;">Total(A)+(B)</th>
+
+                            <th style="background-color:black;color:white;"> <input type="text" onchange="modifyText4()" value="{{totalcost}}" readonly="readonly" id="totrawpack" name="tot_raw_pack" class="form-control" style="width:800px;" />  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:800px;">
+                                Factory OverHead in %
+                            </td>
+                            <td>
+                                <input type="text" class="form-control validate[required]" style="width:800px;" id="factoryoverhead" name="factory_overhead" value="{% for m in ishu%}{{ m.factory}} {% endfor %}" disabled/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:800px;">
+                                Overall Wastage in %
+                            </td>
+                            <td>
+                                <input type="text" class="form-control validate[required]" value="{{oWastage}}" onchange="modifyText4()" style="width:800px;" id="overallwastage" name="overall_wastage" required/>
+                            </td>
+                        </tr>
+
+                    </tbody>
+               
+
+           
+                    <thead>
+                        <tr>
+                            <th style="background-color:black;color:white;">Total Cost Price</th>
+
+                            <th style="background-color:black;color:white;"> <input type="text" onchange="modifyText4()" value="{{pataka}}" readonly="readonly" style="width:800px;" name="total_cost" id="totcost" class="form-control" />  </th>
+                        </tr>
+                   </thead>
+                    <tbody>
+
+                        <tr>
+                            <td style="width:800px;">
+                                Margin In %
+                            </td>
+                            <td>
+                                <input type="text"  value="{{margin_per}}" class="form-control validate[required]" style="width:800px;" onchange="modifyText4()" id="marginin" name="marginin_per" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:800px;">
+                                Margin In Amount
+                            </td>
+                            <td>
+                                <input type="text"  value="{{po}}" class="form-control validate[required]" style="width:800px;" onchange="modifyText4()" id="marginamount" name="margin_in_amount" />
+                            </td>
+                        </tr>
+                    </tbody>
+                   
+             
+
+                    <thead>
+
+                        <tr>
+                            <th style="background-color:black;color:white;">Dealer Price</th>
+
+                            <th style="background-color:black;color:white;"> <input type="text"  onchange="modifyText4()" value="{{dealerprice}}" readonly="readonly" style="width:800px;" id="dealerprice" name="dealer_price" class="form-control" />  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:800px;">
+                                MRP %
+                            </td>
+                            <td>
+                                <input type="text"  value="{{mrp_per}}" class="form-control validate[required]" onchange="modifyText4()" style="width:800px;" id="mrpper" name="mrp_per" />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th style="background-color:black;color:white;">MRP Price</th>
+
+                            <th style="background-color:black;color:white;"> <input type="text"  value="{{MRP}}" readonly="readonly" id="mrpprice" name="mrp_price" style="width:800px;" class="form-control" />  </th>
+                        </tr>
+                    </thead>
+                   
+               
+            </table>
+</div>
+        </div>
+    </div>
+
+        </div>
+     
+    </form>
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+    $(function () {
+        $("#addrows").click(function () {
+            var html = '';
+            html += '<tr>';
+            html += '<td> <input type="text" class="form-control validate[required]" name="packing_material_name" onkeyup="AutosuggestLoader(this);" /> <input type="hidden" name="packing_id[]" value="0" /><input type="hidden" name="Raw_id[]" value="0" /><div class="suggesstion-box suggestionDropdown"></div></td>';
+            html += '<td> <input type="text" class="form-control validate[required]" id="packmatcostp" name="cost_price" onchange="modifyText3(this)" onkeyup="modifyText3(this)" disabled/></td>';
+            html += '<td> <input type="text" class="form-control validate[required]" name="multiplier[]" id="packmatmulti" onchange="modifyText3(this)" onKeyup="modifyText3(this)"  /></td>';
+            html += '<td> <input type="text" class="form-control rowpm" name="final_pack_cost" id="finalpackcost" onchange="modifyText3(this)" onKeyup="modifyText3(this)" /></td>';
+            html += '<td><button type="button" class=" btn btn-sm" onclick="DeleteSelectedRow(this);"><i class="material-icons" style="color:black;">&#xe872;</i></button></td>';
+            
+            html += '</tr>';
+            $('#maintable tr:last').after(html);
+        });
+
+        
+        
+
+        $('html, body').not(".suggesstion-box, #pack_mat").focusout(function () {
+            //$(".suggesstion-box").hide();
+        });
+    });
+
+
+
+    var selectedObj;
+    function AutosuggestLoader(obj) {
+        selectedObj = obj;
+        var inputValue = $(obj).val();
+        if (inputValue.length > 0) {
+            $.ajax({
+                url: "/manufacturing_cost_master/api/get_drugs?q=" + inputValue,
+                //success: function (data) {
+                //    var html = '';
+                //    html += '<div id="autosuggest">';
+                //    html += '</div>';
+                //    $("#num").parents('div').find().after(html);
+                //}
+                success: function(data){
+					var searchResult = '';
+					$(data).each(function(index, result){
+                        searchResult += '<p class=""><a href="javascript:void(0);" onclick="AutosuggestClickHandler(\''+result.id+'\',\''+result.material_name+'\',\''+result.cost_price+'\');">' + result.material_name + '</a></p>';
+					});
+					$(obj).parents('td').find(".suggesstion-box").html(searchResult).show();
+				}
+            });
+        }
+    }
+
+    function AutosuggestClickHandler(rawId, rawName, rawCost) {
+        $(selectedObj).val(rawName);
+        $(selectedObj).parents('tr').find('input[name="packing_id[]"]').val(rawId);
+        $(selectedObj).parents('tr').find('input[name="Raw_id[]"]').val(rawId);
+        $(selectedObj).parents('tr').find('input[name="cost_price"]').val(rawCost);
+        $(".suggesstion-box").hide();
+    }
+
+
+
+    var selectedObj;
+    function AutosuggestNLoader(obj) {
+        selectedObj = obj;
+        var inputValue = $(obj).val();
+        if (inputValue.length > 0) {
+            $.ajax({
+                url: "/manufacturing_cost_master/api/get_drug?q=" + inputValue,
+                //success: function (data) {
+                //    var html = '';
+                //    html += '<div id="autosuggest">';
+                //    html += '</div>';
+                //    $("#num").parents('div').find().after(html);
+                //}
+                success: function (data) {
+                    var searchResult = '';
+                    $(data).each(function (index, result) {
+                        searchResult += '<p class=""><a href="javascript:void(0);" onclick="AutosuggestClickNHandler(\'' + result.id + '\',\'' + result.material_name + '\',\'' + result.raw_cost_price + '\');">' + result.material_name + '</a></p>';
+                    });
+                    $(obj).parents('td').find(".suggesstion-box").html(searchResult).show();
+                }
+            });
+        }
+    }
+
+    function AutosuggestClickNHandler(rawId, rawName, rawCost) {
+        $(selectedObj).val(rawName);
+        $(selectedObj).parents('tr').find('input[name="rt_id"]').val(rawId);
+        $(selectedObj).parents('tr').find('input[name="Raw_id"]').val(rawId);
+        $(selectedObj).parents('tr').find('input[name="raw_cost_price"]').val(rawCost);
+        $(".suggesstion-box").hide();
+    }
+
+    //Raw Material Calculation (A)
+    function modifyText2() { 
+        var a = document.getElementById("rawmatcostp").value; 
+        var b = document.getElementById("rawmulti").value;
+        if(b > 0){}else{
+            b = 0;
+        }
+
+        var c = (parseFloat(a) * parseFloat(b)).toFixed(4); 
+        document.getElementById("finalrawcost").value = c;
+        document.getElementById("multi").value = b;
+        var d = document.getElementById("wastage").value;
+        if(d > 0){}else{
+						d = 0;
+					}
+        var e = ((parseFloat(b) * parseFloat(d)) / 100).toFixed(4);
+        var f = (parseFloat(b) - parseFloat(e)).toFixed(4);
+        var g = (parseFloat(c) / parseFloat(f)).toFixed(4);
+        document.getElementById("total").value = g;
+        h = (parseFloat(b) * parseFloat(g)).toFixed(4);
+        document.getElementById("rmcost").value = h;
+        document.getElementById("mrpprice").value = h;
+        //Evaluate Total
+        modifyText4();
+        debugger;
+    }
+
+    //Packing Material Calculation (B)
+    function modifyText3(obj) {
+
+        var cp = $(obj).parents('tr').find('input[name="cost_price"]').val();
+        
+        var mp = $(obj).val();
+       
+        var fpc = parseFloat(cp) * parseFloat(mp);
+        if (fpc > 0) { } else {
+            fpc = 0;
+        }
+        fpc = fpc.toFixed(4);
+        $(obj).parents('tr').find('input[name="final_pack_cost"]').val(fpc);
+
+          
+        var sum = 0;
+        $(".rowpm").each(function () {
+            var x = $(this).val();
+            sum = (parseFloat(sum) + parseFloat(x)).toFixed(4);
+            
+        });
+        document.getElementById("PMcost").value = sum;
+        var rmcost = document.getElementById("rmcost").value;
+        if(rmcost > 0){}else{
+						rmcost = 0;
+        }
+        var totrawpack = (parseFloat(rmcost) + parseFloat(sum)).toFixed(4); 
+        document.getElementById("totrawpack").value = totrawpack;
+        //Evaluate Total
+        modifyText4();
+        debugger;
+    }
+    //Total Raw & Packing Material Calculation (A+B)
+    function modifyText4() {
+        debugger;
+        var rmcost = document.getElementById("rmcost").value;
+        if(rmcost > 0){}else{
+						rmcost = 0;
+					}
+        var PMcost = document.getElementById("PMcost").value;
+        if(PMcost > 0){}else{
+						PMcost = 0;
+					}
+        
+        var totrawpack = (parseFloat(rmcost) + parseFloat(PMcost)).toFixed(4); 
+        document.getElementById("totrawpack").value = totrawpack;
+        
+        var overallwastage = document.getElementById("overallwastage").value;
+        if(overallwastage > 0){}else{
+						overallwastage = 0;
+					}
+         var factoryoverhead = document.getElementById("factoryoverhead").value;
+        if(factoryoverhead > 0){}else{
+						factoryoverhead = 0;
+					}
+         var p = (parseFloat(overallwastage) * parseFloat(totrawpack) / 100).toFixed(4);
+         var q = (parseFloat(factoryoverhead) * parseFloat(totrawpack) / 100).toFixed(4);
+
+         var totcost = (parseFloat(totrawpack) + parseFloat(p) + parseFloat(q)).toFixed(4);
+        
+        document.getElementById("totcost").value = totcost;
+
+        var marginin = document.getElementById("marginin").value;
+        if(marginin > 0){}else{
+						marginin = 0;
+					}
+        var marginamount =  (parseFloat(totcost) * parseFloat(marginin) / 100).toFixed(4);
+        document.getElementById("marginamount").value = marginamount;
+        
+        
+
+         var dealerprice = (parseFloat(marginamount) + parseFloat(totcost)).toFixed(4);
+          document.getElementById("dealerprice").value = dealerprice;
+
+          var mrpper = document.getElementById("mrpper").value;
+         if(mrpper > 0){}else{
+						mrpper = 0;
+					}
+         var t = (parseFloat(dealerprice) * parseFloat(mrpper) / 100).toFixed(4);
+            
+
+           var mrpprice = (parseFloat(dealerprice) + parseFloat(t)).toFixed(4);
+           document.getElementById("mrpprice").value = mrpprice;
+          debugger;
+    }
+    
+
+  
+
+
+    function DeleteSelectedRow(obj) {
+		var count = $(obj).parents("tbody").find("tr").length;
+		console.log(count);
+		if (count == 1) {
+			swal("One Row Is Must..!");
+		}
+		else {
+		 swal({
+              title: "Are you sure?",
+              text: "Delete Row !",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonClass: "btn-danger",
+              confirmButtonText: "Yes, delete it!",
+              closeOnConfirm: false
+},
+                function () {
+    $(obj).parents('tr').remove();
+  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+});
+		
+		}
+    }
+    
+
+</script>
+
+ {% endblock %}

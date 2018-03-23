@@ -1,0 +1,205 @@
+﻿ {% extends "app/layout.html" %}
+
+ {% block scripts %} 
+
+<div class="container">
+    <h2 style="font-weight:bold;">Manufacturing Cost Price</h2><br /><br />
+    <form class="form-horizontal" action="#" method="post">
+        
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="product_name">Product Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control max" id="product_name" name="product_name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="product_code">Product Code:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control max" id="product_code" name="product_code">
+            </div>
+        </div>
+
+        <div class="form-group"> 
+            <label class="control-label col-sm-2" for="mode_purchase">Mode Of Purchase</label>
+            <div class="col-sm-10">          
+            <select name="mode_purchase" class="form-control max">
+                <option style="align-self:auto;">Local</option>
+                <option style="align-self:auto;">Import</option>
+            </select>
+            </div>
+       </div>
+       
+
+    <div class="col-lg-12">
+         <label class="control-label col-sm-2"></label>
+						<div class="table-responsive" style="overflow-x:hidden">
+                         	<div id="row_#c#" class="tablerow" style="background-color: white; border: groove 1px;">
+								<table class="table table-hover table-bordered table-striped" id="calculateTableLength2" >
+									<tr>
+										<th style="width:40%">Raw Material Name</th>
+										<th>Cost Price</th>
+										<th>Multipliar</th>
+										<th>Final Cost</th>
+										<th>Action</th>
+									</tr>
+									<tbody>
+									</tbody>
+								</table>
+
+                                 <div class= "row">
+									<div class="form-group">
+										<div class= "row">
+											<div class="col-md-2">
+												<button type="button" id="AROW" class="btn btn-primary" style="margin-left: 50px;">Add Row</button>
+											</div>
+										</div>
+									</div>
+								 </div>
+								<table class="table table-hover table-bordered table-striped">
+									<tr>
+										<td width="60%">
+											<label>Total</label> 
+										</td>
+										<td>
+											<input type="text" id="RMTotalMultipliar" value="" readonly="readonly" class="form-control">
+										</td>
+										<td>
+											<input type="text" id="RMTotalFinalPrice" value="" readonly="readonly" class="form-control">
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- wastage -->
+											<label>SHORTAGE IN VALUE</label> 
+										</td>
+										<td>
+											<input type="text" onchange="" class="form-control validate[required]" id="shortagevalue" name="Shortage_Value" value="">
+										</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- wastage -->
+											<label>SHORTAGE IN %</label> 
+										</td>
+										<td>
+											<input type="text" onchange="" class="form-control validate[required]" id="shortagepercentage" name="shortage_per" value="">
+										</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- wastage -->
+											<label>OUTPUT AFTER SHORTAGE</label> 
+										</td>
+										<td>
+											<input type="text" onchange="" class="form-control validate[required]" name="shortage_output" id="shortageoutput" value="">
+										</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- first Output -->
+											<label for="">WASTAGE IN VALUE</label>
+										</td>
+										<td>
+											<input type="text" class="form-control validate[required]" onchange="#" name="wastage_value" id="wastagevalue" value="" >
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- first Output -->
+											<label for="">WASTAGE IN %</label>
+										</td>
+										<td>
+											<input type="text" class="form-control validate[required]" onchange="#" name="wastage_per" id="wastagepercentage" value="" >
+										</td>
+									</tr>
+									<tr>
+										<td width="60%">
+										<!-- first Output -->
+											<label for="">OUTPUT AFTER WASTAGE</label>
+										</td>
+										<td>
+											<input type="text" class="form-control validate[required]" onchange="#" name="wastage_output" id="wastageoutput" value="" >
+										</td>
+										<td>
+											<input type="text" class="form-control" readonly="readonly" name="firstoutput1" id="RMTotalFinalPriceP">
+										</td>
+									</tr>
+									<tr>
+									<td width="60%">
+									<label for="">price per kg /pc</label>
+									</td>
+									<td>
+									<input type="text" class="form-control" readonly="readonly" value="1" name="priceperkg">
+									</td>
+									<td>
+									<input type="text" class="form-control" readonly="readonly" name="priceperkg1" id="priceperkg">
+									</td>
+									</tr>
+								</table>
+								<table class="table table-hover table-bordered table-striped" id="calculateTableLength3">
+									<tr>
+										<th style="width:40%">Packing Material Name</th>
+										<th>Cost Price</th>
+										<th>Multipliar</th>
+										<th>Final Cost</th>
+										<th>Action</th>
+									</tr>
+									<tbody id="addrows">
+									</tbody>
+								</table>
+                                 <div class="form-group">
+									 <div class= "row">
+										 <div class="col-md-4">
+											 <button type="button" id="#" class="btn btn-primary" style="margin-left: 50px;">Add Row</button>
+										  </div>
+										                                      
+									 </div>
+								</div>
+								<table class="table table-hover table-bordered table-striped">
+									<tr>
+										<th>Product Name</th>
+										<th>Price</th>
+									</tr>
+									<tr>
+										<td width="60%">
+											<label><input type="text" class="form-control" onchange="#" id="ProdName" readonly="readonly"></label> 
+										</td>
+										<td>
+											<input type="text" class="form-control" name="FinalProductPrice" id="FinalProductPrice" readonly="readonly">
+										</td>
+									</tr>
+                             	</table>
+					 		</div>
+				     	</div>
+                 	</div>
+         </form>
+	          	</div>
+	     	
+
+<script type="text/javascript">
+    $(function () {
+        $("#AROW").click(function () {
+            var html = '';
+            html += '<tr>';
+            html += '<td> <input type="text" class="form-control validate[required]" name="packing_material_name" onkeyup="AutosuggestLoader(this);" /> <input type="hidden" name="packing_id" value="0" /><div class="suggesstion-box suggestionDropdown"></div></td>';
+            html += '<td> <input type="text" class="form-control validate[required]" id="packmatcostp" name="cost_price" onchange="modifyText3(this)" onkeyup="modifyText3(this)" disabled/></td>';
+            html += '<td> <input type="text" class="form-control validate[required]" name="multiplier" id="packmatmulti" onchange="modifyText3(this)" onKeyup="modifyText3(this)"  /></td>';
+            html += '<td> <input type="text" class="form-control rowpm" name="final_pack_cost" id="finalpackcost" onchange="modifyText3(this)" onKeyup="modifyText3(this)" /></td>';
+            html += '<td><button type="button" class="btn-sm btn-danger" onclick="DeleteSelectedRow(this);"><span class="glyphicon glyphicon-trash"></span></button></td>';
+            
+            html += '</tr>';
+            $('#maintable tr:last').after(html);
+        });
+    });
+
+
+</script>
+        
+{% endblock %}

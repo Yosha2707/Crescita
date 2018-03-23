@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>DjangoWebProject1</Name>
+    <RootNamespace>DjangoWebProject1</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>47313f39-7dac-4d76-a5bb-508d6fa759fa</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>DjangoWebProject1.settings</DjangoSettingsModule>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app\forms.py" />
+    <Compile Include="app\models.py" />
+    <Compile Include="app\tests.py" />
+    <Compile Include="app\views.py" />
+    <Compile Include="app\__init__.py" />
+    <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="cost_price\admin.py" />
+    <Compile Include="cost_price\apps.py" />
+    <Compile Include="cost_price\migrations\__init__.py" />
+    <Compile Include="cost_price\models.py" />
+    <Compile Include="cost_price\tests.py" />
+    <Compile Include="cost_price\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="cost_price\views.py" />
+    <Compile Include="cost_price\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="DjangoWebProject1\__init__.py" />
+    <Compile Include="DjangoWebProject1\settings.py" />
+    <Compile Include="DjangoWebProject1\urls.py" />
+    <Compile Include="DjangoWebProject1\wsgi.py" />
+    <Compile Include="manufacturing_cost_master\admin.py" />
+    <Compile Include="manufacturing_cost_master\apps.py" />
+    <Compile Include="manufacturing_cost_master\migrations\__init__.py" />
+    <Compile Include="manufacturing_cost_master\models.py" />
+    <Compile Include="manufacturing_cost_master\tests.py" />
+    <Compile Include="manufacturing_cost_master\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="manufacturing_cost_master\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="manufacturing_cost_master\__init__.py" />
+    <Compile Include="mode_master\admin.py" />
+    <Compile Include="mode_master\apps.py" />
+    <Compile Include="mode_master\migrations\__init__.py" />
+    <Compile Include="mode_master\models.py" />
+    <Compile Include="mode_master\tests.py" />
+    <Compile Include="mode_master\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mode_master\views.py" />
+    <Compile Include="mode_master\__init__.py" />
+    <Compile Include="profit_master\admin.py" />
+    <Compile Include="profit_master\apps.py" />
+    <Compile Include="profit_master\migrations\__init__.py" />
+    <Compile Include="profit_master\models.py" />
+    <Compile Include="profit_master\tests.py" />
+    <Compile Include="profit_master\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="profit_master\views.py" />
+    <Compile Include="profit_master\__init__.py" />
+    <Compile Include="raw_packing_master\admin.py" />
+    <Compile Include="raw_packing_master\apps.py" />
+    <Compile Include="raw_packing_master\migrations\__init__.py" />
+    <Compile Include="raw_packing_master\models.py" />
+    <Compile Include="raw_packing_master\tests.py" />
+    <Compile Include="raw_packing_master\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="raw_packing_master\views.py" />
+    <Compile Include="raw_packing_master\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\migrations\" />
+    <Folder Include="app\static\" />
+    <Folder Include="app\static\app\" />
+    <Folder Include="app\static\app\content\" />
+    <Folder Include="app\static\app\fonts\" />
+    <Folder Include="app\static\app\scripts\" />
+    <Folder Include="app\static\downloadable file\" />
+    <Folder Include="C:\cres-theta\DjangoWebProject1\app\static\downloadable file\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="app\templates\app\" />
+    <Folder Include="cost_price\" />
+    <Folder Include="cost_price\migrations\" />
+    <Folder Include="cost_price\templates\" />
+    <Folder Include="cost_price\templates\cost\" />
+    <Folder Include="DjangoWebProject1\" />
+    <Folder Include="manufacturing_cost_master\" />
+    <Folder Include="manufacturing_cost_master\migrations\" />
+    <Folder Include="manufacturing_cost_master\templates\" />
+    <Folder Include="mode_master\" />
+    <Folder Include="mode_master\migrations\" />
+    <Folder Include="mode_master\templates\" />
+    <Folder Include="C:\cres-theta\DjangoWebProject1\mode_master\templates\crud\" />
+    <Folder Include="mode_master\templates\crud\" />
+    <Folder Include="profit_master\" />
+    <Folder Include="profit_master\migrations\" />
+    <Folder Include="profit_master\templates\" />
+    <Folder Include="raw_packing_master\" />
+    <Folder Include="raw_packing_master\migrations\" />
+    <Folder Include="raw_packing_master\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\static\app\content\custom.css" />
+    <Content Include="app\static\app\content\datapicker.css" />
+    <Content Include="app\static\app\content\icon.css" />
+    <Content Include="app\static\app\content\sweetalert.css" />
+    <Content Include="app\templates\app\add.html" />
+    <Content Include="app\templates\app\profit.html" />
+    <Content Include="app\templates\app\user.html" />
+    <Content Include="cost_price\templates\cost\cost.html" />
+    <Content Include="cost_price\templates\cost\price.html" />
+    <Content Include="manufacturing_cost_master\templates\list.html" />
+    <Content Include="manufacturing_cost_master\templates\main.html" />
+    <Content Include="manufacturing_cost_master\templates\update.html" />
+    <Content Include="mode_master\templates\crud\edit.html" />
+    <Content Include="mode_master\templates\crud\index.html" />
+    <Content Include="profit_master\templates\index.html" />
+    <Content Include="profit_master\templates\profit.html" />
+    <Content Include="raw_packing_master\templates\add.html" />
+    <Content Include="raw_packing_master\templates\edit.html" />
+    <Content Include="raw_packing_master\templates\index.html" />
+    <Content Include="raw_packing_master\templates\upload.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="db.sqlite3" />
+    <Content Include="app\static\app\content\bootstrap.css" />
+    <Content Include="app\static\app\content\bootstrap.min.css" />
+    <Content Include="app\static\app\content\site.css" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="app\static\app\scripts\bootstrap.js" />
+    <Content Include="app\static\app\scripts\bootstrap.min.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.min.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.min.map" />
+    <Content Include="app\static\app\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.min.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="app\static\app\scripts\modernizr-2.6.2.js" />
+    <Content Include="app\static\app\scripts\respond.js" />
+    <Content Include="app\static\app\scripts\respond.min.js" />
+    <Content Include="app\static\app\scripts\_references.js" />
+    <Content Include="app\templates\app\about.html" />
+    <Content Include="app\templates\app\contact.html" />
+    <Content Include="app\templates\app\index.html" />
+    <Content Include="app\templates\app\layout.html" />
+    <Content Include="app\templates\app\login.html" />
+    <Content Include="app\templates\app\loginpartial.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.html">
+      <SubType>WebBrowser</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

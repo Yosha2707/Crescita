@@ -1,0 +1,41 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="">
+            <a href="/add" class="btn btn-dark btn-sm" style="margin-top:50px; margin:30px;"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD USER</a>
+        </div>
+        </div>
+        <div class="col-md-12 mTB20">
+            <table  id="example" class="display container" cellspacing="0" style="width:100%;">
+		        <thead>
+			        <tr class="table100-head">
+				        <th>User Name</th>
+            	        <th>Email</th>
+            	        <th>Joining Date</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        {% for user in users %}
+                    <tr>
+                        <td>{{user.username }}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.date_joined}}</td>
+                    </tr>
+                    {% endfor %}
+		        </tbody>
+	        </table>
+        </div>
+    </div>
+    <script>
+     $(document).ready(function() {
+         $('#example').DataTable();
+
+    } );
+    </script>
+{% endblock %}
+
+
+
+

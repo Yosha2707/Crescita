@@ -1,0 +1,115 @@
+﻿{% extends "app/layout.html" %}
+{% block scripts %}
+<div class="container">
+    <h2>Update Raw And Packing Material</h2><br /><br />
+    <form method="POST" action="/raw_packing_master/update/{{ raws.id }}">
+        {% csrf_token %}
+       
+
+         
+            <div class="form-group">
+            <label for=" material_type" class="control-label col-md-2">Material Type</label>
+                <div class="col-md-10">
+            <input type="text" name="material_type" value="{{raws.material_type}}" class="form-control" style="width:30%;" required="required"/><br />
+                </div>
+            </div>
+
+            <div class="form-group">
+            <label for="material_name" class="control-label col-md-2">Material Name</label>
+             <div class="col-md-10">
+                 <input type="text" name="material_name" value="{{raws.material_name}}" class="form-control" style="width:30%;" required="required"/><br />
+              </div>
+             </div>
+
+             <div class="form-group">
+            <label for="purchase_name" class="control-label col-md-2">Purchase Name</label>
+             <div class="col-md-10">
+                 <input type="text" name="purchase_name" value="{{raws.purchase_name}}" class="form-control" style="width:30%;" required="required"/><br />
+            </div>
+                 </div>
+
+             <div class="form-group">
+            <label for="purchase_date" class="control-label col-md-2">Purchase Date</label>
+             <div class="col-md-10">
+                 <input type="text" name="purchase_date" value="{{raws.purchase_date}}" class="form-control" style="width:30%;" id="datepicker" required="required"/><br />
+                  </div>
+                 </div>
+
+                  <div class="form-group">
+            <label for="factory_wise_bifercation" class="control-label col-md-2">Factory Wise Bifercation</label>
+            <div class="col-md-10">
+                 <input type="text" name="factory_wise_bifercation" value="{{raws.factory_wise_bifercation}}" class="form-control" style="width:30%;" required="required"/><br />
+                </div>
+                 </div>
+
+                  <div class="form-group">
+           <label for="ex_factory_price" class="control-label col-md-2">Ex Factory Price</label>
+             <div class="col-md-10">
+                <input type="text" name="ex_factory_price" value="{{raws.ex_factory_price}}" class="form-control" style="width:30%;" required="required"/><br />
+            </div>
+         </div>
+
+           <div class="form-group">
+           <label for="supplier_name" class="control-label col-md-2">Supplier Name</label>
+            <div class="col-md-10">
+                 <input type="text" name="supplier_name" value="{{raws.supplier_name}}" class="form-control" style="width:30%;" required="required"/><br />
+                </div>
+                 </div>
+
+                  <div class="form-group">
+           <label for="hsn_code" class="control-label col-md-2">Hsn Code</label>
+             <div class="col-md-10">
+                <input type="text" name="hsn_code" value="{{raws.hsn_code}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+
+           <div class="form-group">
+            <label for="gst" class="control-label col-md-2">GST%</label>
+             <div class="col-md-10">
+                 <input type="text" name="gst" value="{{raws.gst}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+                  <div class="form-group">
+             <label for="price_after_gst" class="control-label col-md-2">Price After GST</label>
+             <div class="col-md-10">
+                 <input type="text" name="price_after_gst" value="{{raws.price_after_gst}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+                  <div class="form-group">
+            <label for="transpoter" class="control-label col-md-2">Transpoter</label>
+             <div class="col-md-10">
+                 <input type="text" name="transpoter" value="{{raws.transpoter}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+                  <div class="form-group">
+            <label for="freight" class="control-label col-md-2">Freight per KG/PC</label>
+             <div class="col-md-10">
+                 <input type="text" name="freight" value="{{raws.freight}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+                  <div class="form-group">
+           <label for="cost_price" class="control-label col-md-2">Cost Price</label>
+             <div class="col-md-10">
+                 <input type="text" name="cost_price" value="{{raws.cost_price}}" class="form-control" style="width:30%;" required="required"/><br />
+                 </div>
+                 </div>
+
+      
+       
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+            <button type="submit" class="btn btn-sm btn-dark" ><span class="glyphicon glyphicon-edit"></span> Update</button>
+        </div>
+            </div>
+    </form>
+    </div>
+<script>
+$("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+</script>
+{% endblock %}

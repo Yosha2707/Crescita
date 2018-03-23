@@ -1,0 +1,88 @@
+﻿{#{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container">
+ <form class="well form-horizontal" method="post" action="/create/">
+      {% csrf_token %}
+<h3 align="left"><b>Registration Form</b></h3><br>
+
+<div class="form-group">
+  <label class="col-md-2 control-label">First Name</label>  
+  <div class="col-md-10">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="first_name" placeholder="First Name" class="form-control"  type="text" required>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" >Last Name</label> 
+    <div class="col-md-10">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="last_name" placeholder="Last Name" class="form-control"  type="text" required>
+    </div>
+  </div>
+</div>
+
+ <div class="form-group">
+  <label class="col-md-2 control-label">Username</label>  
+  <div class="col-md-10">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="username" placeholder="Username" class="form-control" type="text" required>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-2 control-label" >Password</label> 
+    <div class="col-md-10">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="password" placeholder="Password" class="form-control"  type="password" required>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-2 control-label">E-Mail</label>  
+    <div class="col-md-10">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control" type="text" required>
+    </div>
+  </div>
+</div>
+
+    <div class="form-group">
+  <label class="col-md-2 control-label"></label>
+  <div class="col-md-10"><br>
+   <label class="checkbox"><input type="checkbox" name="is_active" value="off" checked><i></i>IS Active?</label>
+    <div class ="clear"></div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label"></label>
+  <div class="col-md-10"><br>
+   <button type="submit" class="btn" style="color:white; background-color:black;" >SUBMIT <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+
+</form>
+</div>
+
+
+
+  
+
+ {% endblock %}#}
+
+
+
+

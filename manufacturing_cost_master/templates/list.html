@@ -1,0 +1,86 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+
+    <div class="row" style="margin:20px 0;">
+        <div class="col-md-12">
+            <div class="col-md-6 pull-right">
+            <a href="add" class="btn btn-dark btn-sm pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD</a>
+            <a href="{% static 'app/downloadable file/SampleSheetManu.csv' %}" role="button" style="margin-left:260px;" class="btn btn-dark" download>Download Sample Sheet</a>
+            </div>
+            <form action="import_file" method="POST" class="form-inline" enctype="multipart/form-data"> {% csrf_token %}
+             <div class="col-md-6">
+                    <input type="file" name="myfile" id="btn-import" class="form-control" required/>
+                    <button class="btn btn-sm btn-dark" > <span id="uploaded-file-name" class="glyphicon glyphicon-upload"></span> Upload</button>
+            </div></form>
+        </div>
+        </div>
+        <div class="row" style="margin:40px 0;">
+        <div class="col-md-12">
+            <table  id="manuf_cost" class="display container">
+		        <thead>
+			        <tr class="table100-head">
+                        <th>S.No</th>
+				        <th>Product Code</th>
+            	        <th>Product Name</th>
+            	        <th>Factory Name</th>
+                        <th>Pack Size</th>
+                        <th>Cost Price</th>
+                        <th>% of Margin</th>
+                        <th>Margin In Amount</th>
+                        <th>Dealer Price</th>
+                        <th>MRP%</th>
+                        <th>MRP</th>
+                        <th>Action</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			       {% for r in results %}
+                    <tr>
+                        <td></td>
+                        <td>{{r.product_code}}</td>
+                        <td>{{r.product_name}}</td>
+                        <td>{{r.factory_name}}</td>
+                        <td>{{r.pack_size}}</td>
+                        <td>{{r.totalcost}}</td>
+                        <td>{{r.margin_per}}</td>
+                        <td>{{r.margin_amount}}</td>
+                        <td>{{r.dealerprice}}</td>
+                        <td>{{r.mrp_per}}</td>
+                        <td>{{r.mrp_price}}</td>
+                        <td><a class="btn btn-md" href="edit/{{r.id}}"><span class="glyphicon glyphicon-edit" style="color:black;"></span></a><a class="btn btn-md" 
+                            href="delete/{{r.id}}"><i class="material-icons" style="color:black;">&#xe872;</i></a></td>
+                    </tr>
+                   {% endfor %}
+		        </tbody>
+	        </table>
+        </div>
+    </div>
+    <script>
+    var oDataTable;
+     $(document).ready(function () {
+     //$.fn.dataTable.moment('DD/MM/YYYY');
+     oDataTable = $('#manuf_cost').DataTable( {
+        "order": [[1, 'asc']],
+        "scrollX": true,
+       
+    } );
+    
+    oDataTable.on( 'order.dt search.dt', function () {
+        oDataTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+      //  oDataTable.column(6, moment(dateObj).format('YYYY-MM-DD');)
+        } );
+     }).draw();
+         
+     });
+
+
+    </script>
+{% endblock %}
+
+
+
+

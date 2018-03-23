@@ -1,0 +1,337 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<form action=""  method="post" id="profit_loss_form" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="container"> 
+		<div class= "row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<h3>Profit and Loss Analysis Sheet</h3><br>
+				</div>
+			</div>
+			<div class="col-md-4 pull-right text-right" style="margin-top:20px;">
+				<a href="" role="button" class="btn btn-dark" download>Download Sample Sheet</a>
+			<button type="button" class="btn btn-dark" style="margin-bottom: 0px;">Export</button>
+			<button type="button" style="margin-bottom: 0px;" class="btn btn-dark">Save</button>
+			</div>
+		</div>
+
+<div class="row">
+<div class="col-md-3">
+	<label>P/L Sheet Name</label>
+	<input type="text" name="" class="form-control" style="width:100%;" required/>
+</div>
+
+<div class="col-md-3">
+	<label>Start Date</label>
+	<input type="text" name="" class="form-control" id="datepicker" style="width:100%;" required/>
+</div>
+
+<div class="col-md-3">
+	<label>End Date</label>
+	<input type="text" name="" class="form-control" id="datepicker1" style="width:100%;" required/>
+
+</div>
+<div class="col-md-3" style="margin-top:22px;">
+	<label for=""></label>
+<button class="btn btn-dark">Submit</button>
+<button class="btn btn-dark" >Upload</button>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" style="margin-top:30px;">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped display" id="profit_table" style="display:block; white-space:nowrap; overflow-x:auto;">
+<thead>
+	<tr>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Brand Code" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Product Code"readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:300px;" value="Product Name" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:300px;" value="Factory Name" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Quantity Sold" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Cost Price" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Effective Cost Price" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:180px;" value="Effective Rate" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Value" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:180px;" value="Dealer Price" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:130px;" value="Margin In %" readonly="readonly"></th>
+									<th><input type ="text" class="form-control" style="width:100%;" value="Margin In Amount" readonly="readonly"></th>
+									<th><input type ="text" style="width:100%;" class="form-control" value="Profit" readonly="readonly"></th>
+									<th>Action</th>
+								</tr>
+</thead>
+
+<tbody>
+									<tr>
+										<td><input type ="hidden" class="form-control" name="row1[]" readonly="readonly" ></td>
+										<td><input type ="hidden" class="form-control" name="row1[]" readonly="readonly" ></td>
+										<td>
+											<input type ="text" class="form-control" name="row1[]" readonly="readonly" style="width:100%;" value="Total Profit">
+										</td>	
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="total_effective_amount" readonly="readonly" data-name="total_effective_amount" id="TotalEffective">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly" >
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="total_dealer_amount" readonly="readonly" data-name="total_dealer_amount" id="TotalDealer">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row1[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="total_margin_amount" readonly="readonly" data-name="total_margin_amount" id="TotalAmount">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="total_profit" data-name="total_profit" readonly="readonly" id="TotalProfit">
+										</td>
+									</tr>
+									<tr>
+										<td><input type ="hidden" class="form-control" name="row2[]" readonly="readonly" ></td>
+										<td><input type ="hidden" class="form-control" name="row2[]" readonly="readonly" ></td>
+										<td>
+											<input type ="text" class="form-control" name="row2[]" readonly="readonly" value="Expenses Head" style="border:none; width:100%;">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly" >
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly" >
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly" >
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly" >
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row2[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="row2[]" readonly="readonly"  value="In Price">
+										</td>
+										<td></td>
+									</tr>
+								
+										<tr>
+										
+											<td><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></td>
+											<td><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></td>
+											<td>
+												<input type="text" style="width:100%;" value="" class="form-control ItemName" name="expenses_head[]" data-name="expenses_head[]">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type ="hidden" class="form-control" name="row3[]" readonly="readonly">
+											</td>
+											<td>
+												<input type="text" value="0"  onkeyup="calculateFinalPrice();" class="form-control expenses"  name="expenses_profit[]" data-name="expenses_profit[]"/>
+											</td>
+											<td >
+												<button type="button" class=" btn btn-sm" onclick="DeleteSelectedRow(this);"><i class="material-icons" style="color:black;">&#xe872;</i></button>
+											</td>
+										</tr>
+							
+									<tr>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<button type="button" id="addrows" class="btn btn-dark" style="margin-left: 26px;">Add Row</button>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td> 
+										<td>
+											<input type ="text" class="form-control" name="row4[]" readonly="readonly" style="width:100%;" value="Total Expenses">
+										</td> 
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="total_expenses" data-name="total_expenses" readonly="readonly" id="TotalExpenses">
+										</td> 
+										<td></td>
+									</tr>
+									<tr>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td style="width:30%">
+											<input type ="text" class="form-control" name="row4[]" readonly="readonly" style="width:100%;" value="Net Profit">
+										</td>	
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="hidden" class="form-control" name="row4[]" readonly="readonly">
+										</td>
+										<td>
+											<input type ="text" class="form-control" name="net_profit" data-name="net_profit" readonly="readonly" id="NetProfit">
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+            </table>	
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+<script>
+
+$("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' }).val();  
+
+$("#datepicker1").datepicker({ dateFormat: 'yy-mm-dd' }).val();   
+
+    $(function () {
+        $("#addrows").click(function () {
+            var html = '';
+            html += '<tr>';
+            
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="text" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th> <th><input type ="hidden" class="form-control" name="row3[]" readonly="readonly" ></th>';
+            html += '<th><button type="button" class=" btn btn-sm" onclick="DeleteSelectedRow(this);"><i class="material-icons" style="color:black;">&#xe872;</i></button></th>';
+            
+            html += '</tr>';
+            $('#profit_table tr:last').after(html);
+        });
+        });
+
+
+    function DeleteSelectedRow(obj) {
+		var count = $(obj).parents("tbody").find("tr").length;
+		console.log(count);
+		if (count == 1) {
+			swal("One Row Is Must..!");
+		}
+		else {
+		 swal({
+              title: "Are you sure?",
+              text: "Delete Row !",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonClass: "btn-danger",
+              confirmButtonText: "Yes, delete it!",
+              closeOnConfirm: false
+},
+                function () {
+    $(obj).parents('tr').remove();
+  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+});
+		
+		}
+    }
+    
+    
+</script>
+{% endblock %}
