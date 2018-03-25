@@ -1,0 +1,11 @@
+Name,Start Date,End Date
+totto,"March 24, 2018, 4:23 p.m.","March 24, 2018, 4:23 p.m."
+
+Brand Code,Product Code,Product Name,Factory Name,Quantity Sold,Cost Price,Effective Cost,Effective Rate,Value,Dealer Price,Margin %,Margin In Amount,Profit
+BE,BE-EABP2,BAKERSVEGGIE - EGGLESS AMERICAN BROWNIE PREMIX - (1 KG X 25 POUCHES X 1 BAG),BVG,6,2279.0,13674.0,3625,21750,2279.0,0.0,0.0,8076.0
+,,,TotalProfit,,,,['39876'],,['2279.0'],,['0.0'],['8076.0']
+,,,Expenses Head,,,,,,,,,Price
+,,,['TRanport'],,,,,,,,,['100']
+,,,['roadways'],,,,,,,,,['50']
+,,Total Expenses,,,,,,,,,,['150.0000']
+,,Net Profit,,,,,,,,,,['7926.0000']

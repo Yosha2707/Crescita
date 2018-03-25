@@ -182,15 +182,27 @@ def export(request):
    
     with open('mycsv.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-
+        writer.writerow(['Name', 'Start Date', 'End Date'])
+        writer.writerow([pl_sheet, start, end])
+        writer.writerow([])
         writer.writerow(['Brand Code', 'Product Code', 'Product Name', 'Factory Name', 'Quantity Sold', 'Cost Price', 'Effective Cost', 'Effective Rate', 'Value', 'Dealer Price', 'Margin %', 'Margin In Amount', 'Profit'])
         
         q = []
         for r in csvd:
-            print(r)
             q.append(r)
-        print(q)
         writer.writerows(q)
+        writer.writerow(['','','Total Profit', '', '', '' '', totalER, '', totalDP, '', totalMA , totalP ])
+        writer.writerow(['','','Expenses Head','', '','','','','','','','Price' ])
+        p = []
+        op = []
+        for o, i in zip(other, otherE): 
+            p.append(o)
+            op.append(i)
+            writer.writerow(['','',p,'','','','','','','','',op])
+            op = []
+            p = []
+        writer.writerow(['','','Total Expenses','','','','','','','','','',totalotherE])
+        writer.writerow(['','','Net Profit','','','','','','','','','',netP])
     return Next(writer)
 
 def Next(request):
