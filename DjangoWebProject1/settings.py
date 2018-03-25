@@ -26,7 +26,7 @@ SECRET_KEY = 'a8650709-3087-403c-bbf3-94ae13e7a388'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mycrescita.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoWebProject1.urls'
