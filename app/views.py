@@ -20,6 +20,7 @@ from django.http import HttpResponse
 import os.path
 import sys
 from wsgiref.util import FileWrapper
+import operator
 
 def home(request):
     """Renders the home page."""
@@ -113,25 +114,26 @@ def import_profit(request):
             
             count = 0
             b = 0
+            rop = []
             for row in reader:
                 if count==0:
                     count=1
                     continue
-                productCode  = row[0]
-                quantitySold = row[1]
-                effectiveRate = row[2]
-                b = b + int(effectiveRate)
-                value = row[3]
-                member = profit(product_code=productCode,
-                                quantity_sold=quantitySold,
-                                effective_rate = effectiveRate,
-                                value=value,
-                                pl_sheet=pl_sheet,
-                                start_date=start,
-                                end_date=end
-                    )
-                member.save()
+                
+                r = profit()
+                r.product_code = row[0]
+                r.quantity_sold = row[1]
+                r.effective_rate = row[2]
+                b = b + float(r.effective_rate)
+                r.value = row[3]
+                r.pl_sheet = pl_sheet
+                r.start_date = start
+                r.end_date = end
+                rop.append(r)
 
+
+ 
+            profit.objects.bulk_create(rop)
             cursor = connection.cursor()
             cursor.execute("SELECT a.pl_sheet, a.start_date, a.end_date,substr(mcp.product_code,0, instr(mcp.product_code, '-')) as brand,mcp.product_name, mcp.product_code, mcp.factory_name,mcp.margin_per, mcp.margin_amount,a.quantity_sold, a.effective_rate, a.value,round(a.quantity_sold*(((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+ table_pack.fpc) +  (mode_master_head.factory*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+  table_pack.fpc)/100) + (mcp.overall_wastage*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100))) *mcp.rawmultiplier)+ table_pack.fpc)/100)) ,4) as effectiveCost,round(a.value-(a.quantity_sold*(((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+ table_pack.fpc) +  (mode_master_head.factory*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+  table_pack.fpc)/100) + (mcp.overall_wastage*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100))) *mcp.rawmultiplier)+ table_pack.fpc)/100))) ,4) as profit, ROUND(((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+ table_pack.fpc) +  (mode_master_head.factory*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+  table_pack.fpc)/100) + (mcp.overall_wastage*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100))) *mcp.rawmultiplier)+ table_pack.fpc)/100),4) as totalcost, ROUND((mcp.margin_amount + ((((mcp.rawmultiplier*rpm.cost_price) /(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+ table_pack.fpc) + (mode_master_head.factory* ((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+ table_pack.fpc)/100) +  (mcp.overall_wastage*((((mcp.rawmultiplier*rpm.cost_price)/(mcp.rawmultiplier-(mcp.wastage*mcp.rawmultiplier/100)))*mcp.rawmultiplier)+  table_pack.fpc)/100)), 4) as dealerprice fROM manufacturing_cost_master_cost as mcp inner join raw_packing_master_raw as rpm  on mcp.raw_id = rpm.id inner join mode_master_head inner join app_profit as a on mcp.product_code=a.product_code left join (SELECT cost_id , ifnull(SUM(rpm.cost_price*mccp.multipliar), 0) as fpc from  manufacturing_cost_master_costpack as mccp left join raw_packing_master_raw as rpm on mccp.packing_id = rpm.id group by mccp.cost_id) as table_pack on table_pack.cost_id=mcp.id")
             columns = [column[0] for column in cursor.description]
@@ -139,15 +141,16 @@ def import_profit(request):
             for row in cursor.fetchall():
                 results.append(dict(zip(columns, row)))
             
-            a = 0
-            c = 0
-            d = 0
-            for ro in results:
-                a = a + ro["dealerprice"]
-                c = c + ro["margin_amount"]
-                d = d + ro["profit"]
+            
+            a = round(sum(map(operator.itemgetter('dealerprice'), results)), 4)
+            c = round(sum(map(operator.itemgetter('margin_amount'), results)), 4)
+            d = round(sum(map(operator.itemgetter('profit'), results)), 4)
+
             context = {'results':results , 'b':b, 'a':a, 'c':c, 'd':d}
         return render(request, 'app/profit.html', context)
+
+
+  
 
 
 def export(request):

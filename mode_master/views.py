@@ -65,15 +65,15 @@ def import_file(request):
         uploaded_file_url = fs.url(filename)
         reader = csv.reader(open(BASE_DIR + uploaded_file_url), dialect='excel', delimiter=",")
         count=0
+        ro = []
         for row in reader:
             if count==0 :
                 count=1
                 continue
-
-            mode_name=row[0]
-            oo= mode(mode_name=mode_name)
-            oo.save()
-           
+            r = mode()
+            r.mode_name=row[0]
+            ro.append(r)
+        mode.objects.bulk_create(ro)   
     return redirect('/mode_master')
    
 

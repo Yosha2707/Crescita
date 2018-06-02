@@ -20,14 +20,14 @@
             </div> 
     </div>
 </div>
-
+<input type="text" placeholder="Gloabal Search" ng-model="searchKeyword" />
 <div class="row">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table" id="mode_master_table">
                 <thead>
               <tr class="table100-head">
-                        <th>S.No</th>
+              <th>S.No</th>
               <th>Master Name</th>
               <th>Created At</th>
               <th>Modified At</th>
@@ -36,7 +36,7 @@
             </thead>
                 <tbody>
             {% for member in members %}
-                <tr>
+                <tr ng-repeat ="member in members  | filter: searchKeyword">
                         <td></td>
                   <td>{{member.mode_name}}</td>
                   <td>{{member.created_date}}</td>
@@ -44,8 +44,11 @@
                   <td ><a class="btn btn-lg" href="edit/{{ member.id }}"><span class="glyphicon glyphicon-edit" style="color:black;"></span></a> <a class="btn btn-xs" href="delete/{{ member.id }}"><i class="material-icons" style="color:black;">&#xe872;</i></a></td>
                 </tr>
                 {% endfor %}
+                    
           </tbody>
+               
             </table>
+             
         </div>
   </div>
 </div>

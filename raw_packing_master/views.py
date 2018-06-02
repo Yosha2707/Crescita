@@ -98,6 +98,7 @@ def import_file(request):
         uploaded_file_url = fs.url(filename)
         reader = csv.reader(open(BASE_DIR + uploaded_file_url), dialect='excel', delimiter=",")
         count=0
+        yo = []
         for row in reader:
             if count==0 :
                 count=1
@@ -109,41 +110,26 @@ def import_file(request):
             except mode.DoesNotExist:
                 modes = None
             if(modes != None):
-                mode_id=modes.id
-                material_type=row[1]
-                material_name=row[2]
-                purchase_name=row[3]
-                purchase_date=row[4]
-                factory_wise_bifercation=row[5]
-                ex_factory_price=float(row[6])
-                supplier_name=row[7]
-                hsn_code=row[8]
-                gst = row[9]
-                price_after_gst = row[10]
-                transpoter = row[11]
-                freight = row[12]
-                cost_price = row[13]
-
-                members= raw(mode_id=mode_id,
-                    material_type=material_type,
-                    material_name=material_name,
-                    purchase_name=purchase_name,
-                    purchase_date=purchase_date,
-                    factory_wise_bifercation=factory_wise_bifercation,
-                    ex_factory_price=ex_factory_price, 
-                    supplier_name=supplier_name,
-                    hsn_code=hsn_code,
-                    gst = gst,
-                    price_after_gst=price_after_gst,
-                    transpoter=transpoter,
-                    freight=freight,
-                    cost_price=cost_price
-
-
-                       )
-                members.save()
+                y = raw()
+                y.mode_id=modes.id
+                y.material_type = row[1]
+                y.material_name = row[2]
+                y.purchase_name = row[3]
+                y.purchase_date = row[4]
+                y.factory_wise_bifercation = row[5]
+                y.ex_factory_price = float(row[6])
+                y.supplier_name = row[7]
+                y.hsn_code = row[8]
+                y.gst = row[9]
+                y.price_after_gst = row[10]
+                y.transpoter = row[11]
+                y.freight = row[12]
+                y.cost_price = row[13]
+                yo.append(y)
+            
             else:
                 print("Mode not found")
+        raw.objects.bulk_create(yo)
     return redirect('/raw_packing_master')
 
 
